@@ -1,0 +1,12 @@
+{
+  "name": "rpc",
+  "version": "1.0.0",
+  "description": "expose methods between node server and web client",
+  "main": "rpc.js",
+  "scripts": {},
+  "author": "Aleta",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.6.0"
+  }
+}
