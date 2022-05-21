@@ -24,7 +24,7 @@ module.exports = {
 			if (onClose) onClose();
 			Object.keys(callIds).forEach(id => {
 				const promise = callIds[id];
-				onWarn("Connection closed during " + promise.debug.method + "() call");
+				if (onWarn) onWarn("Connection closed during " + promise.debug.method + "() call");
 			});
 		});
 	
