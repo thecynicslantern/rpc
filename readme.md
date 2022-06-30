@@ -2,6 +2,8 @@
 
 straightforward, functional, room for polish. remote throwing. uses websockets.
 
+now with trans-network callbacks!
+
 # eg
 
 ## server (node)
@@ -79,4 +81,30 @@ function initConnection(socket){
 	});
 }
 
+```
+
+## callback fun
+
+```js
+
+// client
+const exposeMethods = {
+	doThing: async (num, callback) => {
+		if (num < 0)) return callback(null, "too low");
+		if (num > 50)) return callback(null, "too high");
+		callback(num * 2);
+	}
+};
+
+// server
+const result = client.doThing(6, (result, error) => {
+	if (error){
+		console.error(error);
+	} else {
+		console.log("Result:", result);
+	}
+});
+// writes to server console: Result: 12
+
+// go wild!
 ```
