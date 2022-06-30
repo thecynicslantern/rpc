@@ -105,6 +105,28 @@ const result = client.doThing(6, (result, error) => {
 	}
 });
 // writes to server console: Result: 12
+```
 
-// go wild!
+### go wild!
+
+functions can be passed and returned, including as values in arrays and object properties.
+
+```js
+
+// server
+const store = {};
+const exposeMethods = {
+	getStorage: async () => {
+		return {
+			read: async key => store[key],
+			write: async (key, value) => store[key] = value,
+		}
+	}
+};
+
+// client
+const storage = server.getStorage();
+const name = await storage.get("name");
+storage.set("thing", 5);
+
 ```
