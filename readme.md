@@ -26,9 +26,9 @@ async function initConnection(socket) {
 	const client = RPC.init({
 		socket,
 		onClose: () => {
-			clients = clients.filter(c => c === client);
+			clients = clients.filter(c => c !== client);
 			clients.forEach(c => c.write(`* ${name} has left`)); // <- call write() on the server, as exposed by its RPC.init()
-			delete users[id];
+			delete clients[id];
 		},
 		methods: { // methods to expose to client
 			async say(message) {
@@ -41,7 +41,6 @@ async function initConnection(socket) {
 	clients.forEach(c => c.write(`* ${name} has joined`));
 
 	clients.push(client);
-
 }
 ```
 
@@ -66,7 +65,7 @@ function initConnection(socket){
 		onClose: () => delete users[id],
 		throwBack: true, // rethrow throws to the remote caller
 		methods: { // methods to expose to server
-			write: async (s) => outputElement.appendChild(new Text(s + "\n"),
+			write: async (s) => outputElement.appendChild(new Text(s + "\n")),
 			// remote methods can of course return values:
 			requestName: async () => prompt("server is requesting your nickname"),
 		},
