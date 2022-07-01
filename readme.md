@@ -125,8 +125,8 @@ const exposeMethods = {
 };
 
 // client
-const storage = server.getStorage();
+const storage = await server.getStorage();
 const name = await storage.get("name");
-storage.set("thing", 5);
+await storage.set("thing", 5);
 
 ```
