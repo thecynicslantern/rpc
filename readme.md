@@ -118,8 +118,8 @@ const store = {};
 const exposeMethods = {
 	getStorage: async () => {
 		return {
-			read: async key => store[key],
-			write: async (key, value) => store[key] = value,
+			get: async key => store[key],
+			set: async (key, value) => store[key] = value,
 		}
 	}
 };
